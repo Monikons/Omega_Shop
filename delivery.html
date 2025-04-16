@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Оформление заказа</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #00c76f;
+      padding: 15px;
+      text-align: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .form-container {
+      background: white;
+      width: 100%;
+      max-width: 360px;
+      margin-top: 80px;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #00c76f;
+    }
+
+    .input-group.valid input {
+      border-color: green;
+    }
+
+    .input-group.invalid input {
+      border-color: red;
+    }
+
+    .submit-button {
+      background-color: #fce94f;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+      background-color: #fbe85a;
+    }
+
+    label {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 5px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">Оформление</div>
+
+  <div class="form-container">
+    <h2>Контактная информация</h2>
+    <form id="orderForm">
+      <div class="input-group" id="nameGroup">
+        <input type="text" id="name" placeholder="Ваше имя" required />
+      </div>
+      <div class="input-group" id="phoneGroup">
+        <input type="tel" id="phone" placeholder="Телефон (+7-123-456-78-90)" required />
+      </div>
+      <div class="input-group" id="emailGroup">
+        <input type="email" id="email" placeholder="Email" required />
+      </div>
+
+      <h2>Адрес доставки</h2>
+
+      <div class="input-group">
+        <input type="text" placeholder="Город" required />
+      </div>
+      <div class="input-group">
+        <input type="text" placeholder="Улица" required />
+      </div>
+      <div class="input-group">
+        <input type="text" placeholder="Квартира" required />
+      </div>
+      <div class="input-group">
+        <input type="text" placeholder="Дом" required />
+      </div>
+
+      <button type="submit" class="submit-button">Перейти к оплате</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("orderForm");
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const email = document.getElementById("email");
+
+    function validate(input, condition) {
+      const group = input.parentElement;
+      group.classList.remove("valid", "invalid");
+      if (condition) {
+        group.classList.add("valid");
+      } else {
+        group.classList.add("invalid");
+      }
+    }
+
+    name.addEventListener("input", () => {
+      validate(name, name.value.length >= 2);
+    });
+
+    phone.addEventListener("input", () => {
+      const phoneRegex = /^\+7-\d{3}-\d{3}-\d{2}-\d{2}$/;
+      validate(phone, phoneRegex.test(phone.value));
+    });
+
+    email.addEventListener("input", () => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      validate(email, emailRegex.test(email.value));
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert("Переход к оплате...");
+      // window.location.href = 'payment.html';
+    });
+  </script>
+</body>
+</html>

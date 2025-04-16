@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Категория товаров</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Овощи Онлайн</div>
+    <div class="nav">
+      <a href="index.html">Главная</a>
+      <a href="profile.html">Профиль</a>
+      <a href="delivery.html">Доставка</a>
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1 id="category-title">Категория</h1>
+  </section>
+
+  <div id="category-products" class="product-list"></div>
+
+  <script>
+    const products = [
+      {
+        name: "Помидор",
+        desc: "Свежие и сочные помидоры.",
+        price: 120,
+        img: "assets/img/tomato.jpg",
+        category: "ovoshi"
+      },
+      {
+        name: "Огурец",
+        desc: "Хрустящие и ароматные огурцы.",
+        price: 90,
+        img: "assets/img/cucumber.jpg",
+        category: "ovoshi"
+      },
+      {
+        name: "Перец",
+        desc: "Сочный болгарский перец разных цветов.",
+        price: 150,
+        img: "assets/img/pepper.jpg",
+        category: "ovoshi"
+      },
+      {
+        name: "Яблоко",
+        desc: "Сладкие красные яблоки.",
+        price: 100,
+        img: "assets/img/apple.jpg",
+        category: "frukty"
+      },
+      {
+        name: "Апельсин",
+        desc: "Спелые апельсины.",
+        price: 110,
+        img: "assets/img/orange.jpg",
+        category: "frukty"
+      }
+    ];
+
+    // Получаем категорию из URL
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get("cat");
+
+    document.getElementById("category-title").textContent =
+      category === "ovoshi" ? "Овощи" :
+      category === "frukty" ? "Фрукты" :
+      category === "napitki" ? "Напитки" : "Все товары";
+
+    const container = document.getElementById("category-products");
+    const filtered = products.filter(p => p.category === category);
+
+    filtered.forEach(product => {
+      const div = document.createElement("div");
+      div.className = "product-card";
+      div.innerHTML = `
+        <img src="${product.img}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.desc}</p>
+        <p><strong>${product.price}</strong> ₽</p>
+        <label>Кол-во: 
+          <input class="quantity-select" type="number" min="1" value="1">
+        </label>
+        <button class="cart-button">Выбрать</button>
+      `;
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>

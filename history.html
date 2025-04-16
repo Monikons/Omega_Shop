@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>История заказов — Омега</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Омега</div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="delivery.html">Оформить доставку</a>
+      <a href="history.html" class="active">История заказов</a>
+      <a href="profile.html">Профиль</a>
+    </nav>
+  </header>
+
+  <!-- Hero-блок -->
+  <section class="hero">
+    <h1>История заказов</h1>
+    <p>Здесь вы можете посмотреть свои прошлые покупки</p>
+  </section>
+
+  <div class="container" style="max-width: 800px; margin: 40px auto;">
+    <div id="orders-container"></div>
+  </div>
+
+  <script>
+    const ordersContainer = document.getElementById('orders-container');
+    const history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+
+    if (history.length === 0) {
+      ordersContainer.innerHTML = "<p>Вы ещё ничего не заказывали.</p>";
+    } else {
+      history.forEach((order, index) => {
+        const div = document.createElement("div");
+        div.className = "order";
+
+        div.innerHTML = `
+          <h3>Заказ #${index + 1}</h3>
+          <p><strong>Дата:</strong> ${order.date}</p>
+          <ul>
+            ${order.items.map(item => `<li>${item.name} — ${item.quantity} × ${item.price} ₽</li>`).join("")}
+          </ul>
+          <p><strong>Итого:</strong> ${order.total} ₽</p>
+        `;
+
+        ordersContainer.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Онлайн-магазин овощей</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .category-section {
+      display: none;
+    }
+
+    .category-section.active {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Овощи Онлайн</div>
+    <div class="nav">
+      <a href="index.html" class="active">Главная</a>
+      <a href="profile.html">Профиль</a>
+      <a href="delivery.html">Доставка</a>
+    </div>
+  </div>
+
+  <!-- Hero-блок -->
+  <section class="hero">
+    <h1>Добро пожаловать в наш магазин</h1>
+    <p>Свежие и натуральные продукты прямо к вашему столу</p>
+  </section>
+
+  <!-- Категории -->
+  <section style="text-align: center; margin: 40px 0;">
+    <h2>Категории товаров</h2>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+      <button class="submit-button" onclick="showCategory('ovoshi')">🥦 Овощи</button>
+      <button class="submit-button" onclick="showCategory('frukty')">🍎 Фрукты</button>
+      <button class="submit-button" onclick="showCategory('napitki')">🥤 Напитки</button>
+    </div>
+  </section>
+
+  <!-- Овощи -->
+  <div id="ovoshi" class="category-section active">
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/tomato.jpg" alt="Помидор">
+      <h3>Помидор</h3>
+      <p>Свежие и сочные помидоры.</p>
+      <p><strong>120</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Помидор', 120)">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/cucumber.jpg" alt="Огурец">
+      <h3>Огурец</h3>
+      <p>Хрустящие и ароматные огурцы.</p>
+      <p><strong>90</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Огурец', 90)">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/pepper.jpg" alt="Перец">
+      <h3>Перец</h3>
+      <p>Сочный болгарский перец разных цветов.</p>
+      <p><strong>150</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Перец', 150)">Выбрать</button>
+    </div>
+  </div>
+
+  <!-- Фрукты -->
+  <div id="frukty" class="category-section">
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/apple.jpg" alt="Яблоко">
+      <h3>Яблоко</h3>
+      <p>Сочные и сладкие яблоки.</p>
+      <p><strong>100</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Яблоко', 100)">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/banana.jpg" alt="Банан">
+      <h3>Банан</h3>
+      <p>Спелые бананы из Эквадора.</p>
+      <p><strong>130</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Банан', 130)">Выбрать</button>
+    </div>
+  </div>
+
+  <!-- Напитки -->
+  <div id="napitki" class="category-section">
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/juise.jpg" alt="Сок">
+      <h3>Апельсиновый сок</h3>
+      <p>Натуральный сок без сахара.</p>
+      <p><strong>110</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Сок', 110)">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="file:///D:/for_work/VsCode/EmeriaStudio/emperia_proilojenie/omega_shop/assets/img/water.jpg" alt="Вода">
+      <h3>Минеральная вода</h3>
+      <p>Освежающая и полезная вода.</p>
+      <p><strong>60</strong> ₽</p>
+      <label>Кол-во: <input class="quantity-select" type="number" min="1" value="1" /></label>
+      <button onclick="addToCart('Вода', 60)">Выбрать</button>
+    </div>
+  </div>
+
+  <!-- Корзина -->
+  <h2 style="text-align: center; margin-top: 40px;">Выбранные товары</h2>
+  <div id="product-list" style="text-align: center;">
+    <button onclick="addToCart('Огурцы', 80)">Огурцы – 80₽</button>
+    <button onclick="addToCart('Помидоры', 100)">Помидоры – 100₽</button>
+    <button onclick="addToCart('Хлеб', 40)">Хлеб – 40₽</button>
+  </div>
+
+  <div id="cart" style="margin: 30px auto; max-width: 600px;">
+    <h3>Корзина:</h3>
+    <ul id="cart-items" style="list-style: none; padding: 0;"></ul>
+    <p><strong>Итого:</strong> <span id="total">0</span> ₽</p>
+  </div>
+
+  <!-- Кнопки действий -->
+  <div style="text-align: center; margin-top: 30px;">
+    <button class="cart-button" onclick="window.location.href='cart.html'">🛒 Посмотреть корзину</button>
+    <button class="submit-button" onclick="window.location.href='history.html'">История заказов</button>
+  </div>
+
+  <!-- Скрипты -->
+  <script>
+    function showCategory(id) {
+      const sections = document.querySelectorAll('.category-section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    const cart = [];
+
+    function addToCart(productName, price) {
+      const existing = cart.find(item => item.name === productName);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name: productName, price: price, qty: 1 });
+      }
+      renderCart();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById("cart-items");
+      const totalPrice = document.getElementById("total");
+      cartList.innerHTML = "";
+
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.style.marginBottom = "10px";
+
+        li.innerHTML = `
+          ${item.name} x${item.qty} — ${item.price * item.qty}₽
+          <button onclick="removeFromCart(${index})" style="margin-left:10px;">Убрать</button>
+        `;
+        cartList.appendChild(li);
+        total += item.price * item.qty;
+      });
+
+      totalPrice.textContent = total;
+    }
+  </script>
+</body>
+</html>

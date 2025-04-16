@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Омега — Профиль</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    document.documentElement.className = localStorage.getItem("theme") || "light";
+  </script>
+  <style>
+    .profile-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .profile-avatar {
+      display: block;
+      margin: 0 auto 15px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+    }
+
+    .theme-toggle {
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Омега</div>
+    <nav class="nav">
+      <a href="index.html">Главная</a>
+      <a href="delivery.html">Оформить Доставку</a>
+      <a href="profile.html" class="active">Профиль</a>
+    </nav>
+  </header>
+
+  <main class="container profile-container">
+    <h2>Профиль</h2>
+    <img id="profile-avatar" class="profile-avatar" src="" alt="Аватар" />
+    <form id="profile-form">
+      <div class="form-group">
+        <label for="username">Имя</label>
+        <input type="text" id="username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="avatar-upload">Аватар</label>
+        <input type="file" id="avatar-upload" accept="image/*" />
+      </div>
+
+      <button type="submit" class="submit-button">Сохранить</button>
+    </form>
+
+    <div class="theme-toggle">
+      <button id="toggle-theme">🌙 Сменить тему</button>
+    </div>
+  </main>
+
+  <script src="theme.js"></script>
+  <script>
+    const avatarEl = document.getElementById("profile-avatar");
+    const avatarUpload = document.getElementById("avatar-upload");
+    const usernameInput = document.getElementById("username");
+
+    // Загрузка данных из localStorage
+    const savedName = localStorage.getItem("username");
+    const savedAvatar = localStorage.getItem("avatar");
+
+    if (savedName) usernameInput.value = savedName;
+    if (savedAvatar) avatarEl.src = savedAvatar;
+    else avatarEl.src = "img/default-avatar.png"; // резервный аватар
+
+    // Сохранение данных
+    document.getElementById("profile-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = usernameInput.value.trim();
+      if (username) {
+        localStorage.setItem("username", username);
+      }
+      alert("Данные профиля сохранены!");
+    });
+
+    // Обработка загрузки аватара
+    avatarUpload.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const dataUrl = event.target.result;
+          avatarEl.src = dataUrl;
+          localStorage.setItem("avatar", dataUrl);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+<script src="form-validation.js"></script>
+</html>

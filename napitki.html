@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Категория: Напитки</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Овощи Онлайн</div>
+    <div class="nav">
+      <a href="index.html">Главная</a>
+      <a href="profile.html">Профиль</a>
+      <a href="delivery.html">Доставка</a>
+    </div>
+  </div>
+
+  <!-- Название категории -->
+  <section class="hero">
+    <h1>Категория: Напитки</h1>
+    <p>Освежающие напитки к вашему столу</p>
+  </section>
+
+  <!-- Товары -->
+  <div class="product-list">
+    <div class="product-card">
+      <img src="assets/img/juice.jpg" alt="Яблочный сок">
+      <h3>Яблочный сок</h3>
+      <p>100% натуральный, без сахара.</p>
+      <p><strong>80</strong> ₽</p>
+      <label>Кол-во:
+        <input class="quantity-select" type="number" min="1" value="1">
+      </label>
+      <button class="cart-button">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/img/water.jpg" alt="Вода">
+      <h3>Питьевая вода</h3>
+      <p>Газированная и негазированная, 1л.</p>
+      <p><strong>40</strong> ₽</p>
+      <label>Кол-во:
+        <input class="quantity-select" type="number" min="1" value="1">
+      </label>
+      <button class="cart-button">Выбрать</button>
+    </div>
+
+    <div class="product-card">
+      <img src="assets/img/kombucha.jpg" alt="Комбуча">
+      <h3>Комбуча</h3>
+      <p>Ферментированный чай, 0.5л.</p>
+      <p><strong>110</strong> ₽</p>
+      <label>Кол-во:
+        <input class="quantity-select" type="number" min="1" value="1">
+      </label>
+      <button class="cart-button">Выбрать</button>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin: 30px;">
+    <button class="submit-button" onclick="window.location.href='cart.html'">🛒 Корзина</button>
+  </div>
+</body>
+</html>
